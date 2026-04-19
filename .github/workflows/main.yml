@@ -12,11 +12,11 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Adding Bandit Scanner
-        uses: DevSecNinja/python-bandit-scan@v1
-        with:
-          path: 'Project'
-          exit_zero: false
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install bandit
+          cd Project
+          bandit -r . -ii
+        
             
       - name: Build Docker Image
         run: |
