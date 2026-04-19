@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: hehe_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      
+  api:
+    build: .
+    container_name: hehe_api
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=hasan
+      - MONGO_URI=mongodb://admin:secret@mongo:27017/Show_Tracker?authSource=admin
+   
