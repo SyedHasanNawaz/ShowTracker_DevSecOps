@@ -16,7 +16,15 @@ jobs:
           pip install bandit
           cd Project
           bandit -r . -ii
-        
+
+      - name: Trivy Image Scan
+        run: |
+          apt-get install -y wget apt-transport-https gnupg lsb-release
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | tee -a /etc/apt/sources.list.d/trivy.list
+          apt-get update
+          apt-get install -y trivy
+          trivy image --exit-code 1 --severity HIGH,CRITICAL hehe
             
       - name: Build Docker Image
         run: |
