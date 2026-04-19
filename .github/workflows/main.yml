@@ -10,8 +10,17 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        
+      
+      - name: Adding Bandit Scanner
+        uses: shundor/bandit-action@v1
+        with: 
+            path: "Project"
+            level: high
+            confidence: high
+            exit_zero: false    
+            
       - name: Build Docker Image
         run: |
           cd Project
           docker build -t hehe .
+      
