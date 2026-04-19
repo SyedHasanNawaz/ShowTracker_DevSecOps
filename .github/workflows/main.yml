@@ -29,6 +29,7 @@ jobs:
           echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
           sudo apt-get update
           sudo apt-get install -y trivy
+          ls
           trivy image --exit-code 1 --severity HIGH,CRITICAL --format table hehe
             
       
