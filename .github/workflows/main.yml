@@ -10,9 +10,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Debug - List Files
-        run: ls -la
-
+        
       - name: Build Docker Image
-        run: docker build -t hehe .
+        run: |
+          cd Project
+          docker build -t hehe .
