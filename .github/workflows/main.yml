@@ -19,7 +19,7 @@ jobs:
       - name: Build Docker Image
         run: |
           cd Project
-          docker build -t hehe .
+          docker build --no-cache -t hehe .
           
       - name: Trivy Image Scan
         run: |
