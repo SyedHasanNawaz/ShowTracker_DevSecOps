@@ -16,7 +16,11 @@ jobs:
           pip install bandit
           cd Project
           bandit -r . -ii
-
+      - name: Build Docker Image
+        run: |
+          cd Project
+          docker build -t hehe .
+          
       - name: Trivy Image Scan
         run: |
           sudo apt-get update
@@ -27,8 +31,5 @@ jobs:
           sudo apt-get install -y trivy
           trivy image --exit-code 1 --severity HIGH,CRITICAL --format table hehe
             
-      - name: Build Docker Image
-        run: |
-          cd Project
-          docker build -t hehe .
+      
       
