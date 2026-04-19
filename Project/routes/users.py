@@ -48,7 +48,7 @@ def login(username: str = Form(...), password: str = Form(...)):
     user = users_db.find_one({"username": username})
     if user and verify_password(password, user["password"]):
         # Added nosec here as it was being flagged by Bandit as a False Positive
-        token = create_token({"sub": user.id})#nosec
+        token = create_token({"sub": user.id}) # nosec
         return {"access_token": token, "token_type": "bearer"}
     raise HTTPException(status_code=401, detail="Invalid credentials")
 
