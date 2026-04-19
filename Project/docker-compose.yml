@@ -7,8 +7,8 @@ services:
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASS
       
   api:
     build: .
@@ -16,6 +16,5 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - SECRET_KEY=hasan
-      - MONGO_URI=mongodb://admin:secret@mongo:27017/Show_Tracker?authSource=admin
-   
+      - SECRET_KEY=$SECRET_KEY
+      - MONGO_URI=$MONGO_URI   
