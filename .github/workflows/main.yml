@@ -38,5 +38,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}    
+
+      - name: Adding tag to an image
+        run: docker tag hehe hasannawaz05/showtracker-api:latest
+        
+      - name: Pushing image to DockerHub
+        run: docker push hehe hasannawaz05/showtracker-api:latest
+        
       
       
