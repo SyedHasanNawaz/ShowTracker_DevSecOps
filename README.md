@@ -1,105 +1,86 @@
-# 📺 ShowTracker Backend
+🛡️ Secure ShowTracker: DevSecOps Pipeline 
 
-ShowTracker is a backend service designed to manage user authentication and TV show tracking. Built using **FastAPI** and **Python**, it features a modular structure with clear separation of routes, models, and database logic.
+A production-grade TV show tracking backend built with FastAPI and MongoDB, designed to demonstrate secure containerization and automated CI/CD security scanning. 
+🔑 The DevSecOps Focus 
 
-## 📁 Project Structure
+This project is not just about writing API endpoints. It is about building a secure software supply chain. The pipeline ensures that vulnerable code never makes it to production. 
 
-```
-ShowTracker Backend/
-├── routes/
-│   ├── episodes.py        # Episode-related routes
-│   ├── shows.py           # Show catalog endpoints
-│   ├── users.py           # User registration/login
-│   ├── watched.py         # Track watched content
-│   └── watchlist.py       # Manage user watchlists
-├── auth.py                # Handles authentication (JWT)
-├── database.py            # Database connection and session
-├── main.py                # Entry point, initializes FastAPI app
-├── models.py              # Database models and schemas
-├── requirements.txt       # Python dependencies
-├── Secret.env             # Environment variables (excluded from Git)
-├── Procfile               # Deployment config (Heroku or similar)
-└── .venv/                 # Virtual environment (excluded from Git)
-```
+     SAST (Static Analysis): Bandit scans raw Python code for security flaws (e.g., hardcoded passwords) before the application is even packaged.
+     Container Security: The app is packaged into a lightweight Docker container.
+     Image Scanning: Trivy scans the final Docker image for known CVEs (both OS-level and Python dependencies).
+     Shift-Left Security: If a HIGH or CRITICAL vulnerability is detected, the GitHub Actions pipeline fails immediately, blocking the deployment.
+     
 
-## 🚀 Features
+🏗️ Architecture 
 
-- 🔐 User authentication with JWT tokens
-- 📺 CRUD APIs for shows and episodes
-- ✅ Track watched episodes and user progress
-- 📌 Manage watchlists per user
-- 📁 Modular route-based architecture
-- 📖 FastAPI interactive documentation at `/docs`
+     Backend: Python 3.12 / FastAPI
+     Database: MongoDB (Orchestrated via Docker Compose)
+     Containerization: Docker (Multi-environment support)
+     CI/CD: GitHub Actions
+     Security Tools: Bandit, Trivy
+     Registry: Docker Hub
+     
 
-## 🛠️ Tech Stack
+🚀 The Pipeline 
 
-- **Language:** Python 3.x
-- **Framework:** FastAPI
-- **Database:** SQLite / PostgreSQL
-- **ORM:** SQLAlchemy / Pydantic
-- **Authentication:** JWT tokens via `auth.py`
+Every push to the main branch triggers the following automated workflow: 
 
-## ⚙️ Setup Instructions
+    Code Checkout 
+    Bandit Scan (Fails on Medium/High Python flaws) 
+    Docker Build (Packages the application) 
+    Trivy Scan (Fails on HIGH/CRITICAL CVEs) 
+    Docker Push (Uploads secured image to Docker Hub) 
 
-1. **Clone the Repository**
+🐳 Quick Start (Using Docker Compose) 
 
-   ```sh
-   git clone https://github.com/your-username/showtracker-backend.git
-   cd showtracker-backend
-   ```
+    Clone the repository: 
 
-2. **Set Up Virtual Environment**
+bash
+ 
+  
+ 
+git clone https://github.com/SyedHasanNawaz/ShowTracker_DevSecOps.git
+ 
+ 
+ 
 
-   ```sh
-   python -m venv .venv
-   # For Linux/macOS
-   source .venv/bin/activate
-   # For Windows
-   .venv\Scripts\activate
-   ```
+    Create a .env file in the root directory (variables are safely excluded from Git): 
 
-3. **Install Dependencies**
+env
+ 
+  
+ 
+MONGO_USER=admin
+MONGO_PASS=your_secure_password
+SECRET_KEY=your_jwt_secret
+MONGO_URI=mongodb://admin:your_secure_password@mongo:27017/Show_Tracker?authSource=admin
+ 
+ 
+ 
 
-   ```sh
-   pip install -r requirements.txt
-   ```
+    Spin up the backend and database: 
 
-4. **Configure Environment Variables**
+bash
+ 
+  
+ 
+docker compose --env-file .env up -d --build
+ 
+ 
+ 
 
-   Create a file called `.env` or use your existing `Secret.env`:
+    Access the interactive API documentation:
+    http://localhost:8000/docs  
 
-   ```
-   SECRET_KEY=your_secret_key
-   DATABASE_URL=your_database_url
-   ```
+📂 Core API Endpoints 
 
-5. **Run the App**
-   ```sh
-   uvicorn main:app --reload
-   ```
+     POST /users/register - Create a new user
+     POST /users/login - Authenticate and receive JWT
+     GET /shows/ - Fetch TV show catalog
+     POST /watchlist/ - Add shows to user watchlist
+     
 
-## 📂 API Overview
+(Full endpoint list available at the /docs Swagger UI) 
+✍️ Author 
 
-Explore and test the API using FastAPI's Swagger UI at:  
-[http://localhost:8000/docs](http://localhost:8000/docs)
-
-Main endpoints include:
-
-- `POST /auth/login`
-- `POST /auth/register`
-- `GET /users/`
-- `GET /shows/`
-- `GET /episodes/`
-- `GET /watchlist/`
-- `POST /watched/`
-
-## ✍️ Author
-
-**Syed Hasan Nawaz**  
-[GitHub Profile](https://github.com/SyedHasanNawaz)
-
-## 📌 Notes
-
-- Do **not** push `.env`, `.venv/`, or `.idea/` to GitHub
-- Add all sensitive files to `.gitignore`
-- This project is ready for deployment using a `Procfile` if needed (e.g., Heroku)
+Syed Hasan Nawaz | (https://www.linkedin.com/in/syed-hasan-nawaz-384b26362/) | Docker Hub  
