@@ -1,4 +1,4 @@
-🛡️ Secure ShowTracker: DevSecOps Pipeline 
+🛡️ Secure ShowTracker: DevSecOps Pipeline
 
 A production-grade TV show tracking backend built with FastAPI and MongoDB, designed to demonstrate secure containerization and automated CI/CD security scanning. 
 🔑 The DevSecOps Focus 
