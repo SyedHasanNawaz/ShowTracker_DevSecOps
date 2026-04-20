@@ -43,7 +43,7 @@ jobs:
         run: docker tag hehe hasannawaz05/showtracker-api:latest
         
       - name: Pushing image to DockerHub
-        run: docker push hehe hasannawaz05/showtracker-api:latest
+        run: docker push hasannawaz05/showtracker-api:latest
         
       
       
